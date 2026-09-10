@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tropical Cyclone Explorer</title>
+  <meta name="description" content="Search historical Atlantic and East/Central Pacific tropical storms and hurricanes and view their tracks and intensity." />
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <header>
+        <div class="eyebrow">NOAA / NHC HURDAT2</div>
+        <h1>🌀 Tropical Cyclone Explorer</h1>
+        <p>Search hurricanes and tropical storms, then open a storm to see its track and intensity history.</p>
+      </header>
+
+      <div class="controls">
+        <label class="search-wrap">
+          <span>Search</span>
+          <input id="search" type="search" placeholder="e.g. Katrina, Milton, 2017…" autocomplete="off" />
+        </label>
+
+        <div class="filter-grid">
+          <label>
+            Basin
+            <select id="basinFilter">
+              <option value="all">All basins</option>
+              <option value="Atlantic">Atlantic</option>
+              <option value="Pacific">East/Central Pacific</option>
+            </select>
+          </label>
+          <label>
+            Type
+            <select id="typeFilter">
+              <option value="all">TS + hurricanes</option>
+              <option value="HU">Hurricanes only</option>
+              <option value="TS">Tropical storms only</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="status" class="status">Loading storm database…</div>
+      </div>
+
+      <div id="results" class="results" aria-live="polite"></div>
+    </aside>
+
+    <main class="map-panel">
+      <div id="map"></div>
+
+      <section id="stormCard" class="storm-card hidden">
+        <button id="closeCard" class="close-card" aria-label="Close storm details">×</button>
+        <div class="storm-heading">
+          <div>
+            <div id="stormBasin" class="eyebrow"></div>
+            <h2 id="stormTitle"></h2>
+          </div>
+          <div id="stormBadge" class="storm-badge"></div>
+        </div>
+
+        <div class="stats">
+          <div><span>Peak wind</span><strong id="peakWind"></strong></div>
+          <div><span>Min pressure</span><strong id="minPressure"></strong></div>
+          <div><span>Dates</span><strong id="stormDates"></strong></div>
+        </div>
+
+        <div class="legend">
+          <span><i class="dot td"></i>TD</span>
+          <span><i class="dot ts"></i>TS</span>
+          <span><i class="dot c1"></i>Cat 1</span>
+          <span><i class="dot c2"></i>Cat 2</span>
+          <span><i class="dot c3"></i>Cat 3</span>
+          <span><i class="dot c4"></i>Cat 4</span>
+          <span><i class="dot c5"></i>Cat 5</span>
+          <span><i class="dot other"></i>Other</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
